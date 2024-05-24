@@ -45,8 +45,8 @@ contract MaliciousSeller {
 
     receive() external payable {
         if (address(auction).balance >= auction.highestBid()) {
-            nft.transferFrom(address(this), address(auction), tokenId);
             auction.end();
+            nft.transferFrom(address(this), address(auction), tokenId);
         }
     }
 

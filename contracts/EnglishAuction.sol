@@ -46,8 +46,8 @@ contract EnglishAuction {
         require(block.timestamp >= endAt, "Auction is still going");
         require(!ended, "Auction has already finished");
         if (highestBidder != address(0)) {
-            nft.transferFrom(address(this), highestBidder, nftId);
             (bool isSuccess, ) = seller.call{value: highestBid}("");
+            nft.transferFrom(address(this), highestBidder, nftId);
         } else {
             nft.safeTransferFrom(address(this), seller, nftId);
         }
